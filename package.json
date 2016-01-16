@@ -1,0 +1,9 @@
+{
+  "name": "dumb-chat-example",
+  "version": "0.0.1",
+  "description": "my first dumb node.js app",
+  "dependencies": {
+    "express": "^4.13.3",
+    "socket.io": "^1.4.4"
+  }
+}
