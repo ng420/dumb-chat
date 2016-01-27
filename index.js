@@ -10,14 +10,28 @@ app.get('/', function(req, res){
 });
 
 io.on('connection', function(socket){
-  io.emit('chat message', 'a new user has entered the ring');
-  socket.on('chat message', function(msg){
-    io.emit('chat message', msg);
-	console.log(msg);
+
+  socket.on('add user', function(name){
+    socket.username = name;
+    io.emit('chat message', {
+        username: 'Admin',
+        message: name + ' has joined the chat.'
+    });
   });
-  /*socket.on('disconnect', function(){
-    io.emit('chat message', 'KO');
-  });*/
+
+  socket.on('chat message', function(data){
+    io.emit('chat message', {      
+        username: socket.username,
+        message: data
+    });
+  });
+  
+  socket.on('disconnect', function(){
+    io.emit('chat message', {
+        username: 'Admin',
+        message: socket.username + ' has left the chat.'
+    });
+  });
 });
 
 http.listen(3000, function(){
