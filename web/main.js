@@ -1,5 +1,6 @@
 $(function() {
-	var socket = io();
+	var username = prompt("Please enter your username", "Harry Potter");
+    var socket = io();
 
 	$('form').submit(function(){
 		socket.emit('chat message', $('#m').val());
